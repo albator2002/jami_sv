@@ -18,7 +18,7 @@ var cors = require('cors');
 var mongoose = require('mongoose');
 var model = require('./model');
 
-var jobModel = model.loadJobModel();
+var orderModel = model.loadOrderModel();
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -27,9 +27,21 @@ app.use(function(req, res, next) {
   next();
 });
 
+//Get filtered order list
+    app.get( '[/api/orders?$filter=]+[\\s\\S]', function( request, response ) {
+        return orderModel.find(request.params.$filter,function( err, requests ) {
+            if( !err ) {
+                return response.send( requests );
+            } else {
+                console.log( err );
+                return response.send('ERROR');
+            }
+        });
+    });
+
 //Get a list of all requests
-app.get( '/api/jobs', function( request, response ) {
-    return jobModel.find(function( err, requests ) {
+app.get( '/api/orders', function( request, response ) {
+    return orderModel.find(function( err, requests ) {
         if( !err ) {
             return response.send( requests );
         } else {
@@ -38,42 +50,44 @@ app.get( '/api/jobs', function( request, response ) {
         }
     });
 });
-//Insert a new job
-app.post( '/api/jobs',cors(), function( request, response ) {
-    var jobDTO = new jobModel();
-    jobDTO.data = request.body.data;
-    jobDTO.data.location = request.body.data.location;
-    jobDTO.save( function( err ) {
+
+
+
+//Insert a new order
+app.post( '/api/order',cors(), function( request, response ) {
+    var orderDTO = new orderModel();
+    orderDTO.data = request.body.data;    
+    orderDTO.save( function( err ) {
         if( !err ) {  
-            console.log( 'Job inserted' );
-            return response.send( jobDTO );
+            console.log( 'order inserted' );
+            return response.send( orderDTO );
         } else {  
             console.log( err );
             return response.send('ERROR');
         }
     });
 });
-//Get a single job by id
-app.get( '/api/jobs/:id', function( request, response ) {
-    return jobModel.findById( request.params.id, function( err, jobDTO ) {
+//Get a single order by id
+app.get( '/api/orders/:id', function( request, response ) {
+    return orderModel.findById( request.params.id, function( err, orderDTO ) {
         if( !err ) {
-            return response.send( jobDTO );
+            return response.send( orderDTO );
         } else {
             console.log( err );
             return response.send('ERROR');
         }
     });
 });
-//Update a job
-app.put( '/api/jobs/:id', function( request, response ) {
-    return jobModel.findById( request.params.id, function( err, jobDTO ) {
+//Update a order
+app.put( '/api/orders/:id', function( request, response ) {
+    return orderModel.findById( request.params.id, function( err, orderDTO ) {
       
-        jobDTO.data = request.body.data;
+        orderDTO.data = request.body.data;
        
-        return jobDTO.save( function( err ) {
+        return orderDTO.save( function( err ) {
             if( !err ) {
-                console.log( 'job updated' );
-                return response.send( jobDTO );
+                console.log( 'order updated' );
+                return response.send( orderDTO );
             } else {
                 console.log( err );
                 return response.send('ERROR');
@@ -82,11 +96,11 @@ app.put( '/api/jobs/:id', function( request, response ) {
     });
 });
 //Delete a book
-app.delete( '/api/jobs/:id', function( request, response ) {
-    jobModel.findById( request.params.id, function( err, jobDTO ) {
-        return jobDTO.remove( function( err ) {
+app.delete( '/api/orders/:id', function( request, response ) {
+    orderModel.findById( request.params.id, function( err, orderDTO ) {
+        return orderDTO.remove( function( err ) {
             if( !err ) {
-                console.log( 'job removed' );
+                console.log( 'order removed' );
                 return response.send( '' );
             } else {
                 console.log( err );

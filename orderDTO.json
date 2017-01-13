@@ -1,0 +1,94 @@
+{
+	"data": {
+		"transactions": [{
+			"amount": {
+				"total": {
+					"type": "Number",
+					"required": "total is required"
+				},
+				"currency": {
+					"type": "String",
+					"required": "description is required"
+				},
+				"details": {
+					"subtotal": {
+						"type": "Number",
+						"required": "subtotal is required"
+					},
+					"tax": {
+						"type": "Number",
+						"required": "tax is required"
+					}
+				}
+			},
+			"item_list": {
+				"items": [{
+					"name": {
+						"type": "String",
+						"required": "id is required"
+					},
+					"description": {
+						"type": "String",
+						"required": "description is required"
+					},
+					"price": {
+						"type": "Number",
+						"required": "price is required"
+					},
+					"quantity": {
+						"type": "Number",
+						"required": "Quantity is required"
+					},
+					"currency": {
+						"type": "String",
+						"required": "currency is required"
+					}
+				}]
+			},
+			"shipping_address": {
+
+				"recipient_name": {
+					"type": "String",
+					"required": "Lastname is required"
+				},
+				"line1": {
+					"type": "String",
+					"required": "Lastname is required"
+				},
+				"line2": {
+					"type": "String",
+					"required": "Lastname is required"
+				},
+				"city": {
+					"type": "String",
+					"required": "city is required"
+				},
+				"country_code": {
+					"type": "String",
+					"required": "country is required"
+				},
+				"phone": {
+					"type": "String",
+					"required": "phone is required"
+				},
+				"state": {
+					"type": "String",
+					"required": "phone is required"
+				}
+
+			}
+			
+		}],
+		"payment": {
+			"id": {
+				"type": "String",
+				"required": "id is required"
+			}
+		},
+		"created": {
+			"type": "Date",
+			"default": "setDefaultDate"
+		}
+	}
+
+}

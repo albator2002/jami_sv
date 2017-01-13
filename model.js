@@ -22,8 +22,8 @@ exports.loadProfileModel = function(){
 return mongooseGen.loadSchema('profileDTO');  //, searchConfigSchema );
 
 };
-exports.loadJobModel = function(){
+exports.loadOrderModel = function(){
 
-    return mongooseGen.loadSchema('jobDTO');  //, searchConfigSchema );
+    return mongooseGen.loadSchema('orderDTO');  //, searchConfigSchema );
 
 };

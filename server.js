@@ -21,7 +21,7 @@ app.use( methodOverride() );
 
 
 //Connect to database
-mongoose.connect( 'mongodb://localhost/jobine', function(err) {
+mongoose.connect( 'mongodb://localhost/jam', function(err) {
     if (err) {
         console.error(chalk.red('Could not connect to MongoDB!'));
         console.log(chalk.red(err));
@@ -30,7 +30,7 @@ mongoose.connect( 'mongodb://localhost/jobine', function(err) {
 
 //Request handler module
 require('./profileRouter')(app);
-require('./jobRouter')(app);
+require('./orderRouter')(app);
 //require('./searchLayoutRouter')(app);
 
 //Start server

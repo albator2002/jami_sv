@@ -23,10 +23,10 @@ generator.setDefault('setDefaultDate', function () {
     return Date.now();
 });
 generator.setDefault('setDefaultMock', function () {
-    return "fjjfhgh";
+    return "";
 });
 generator.setDefault('setDefaultMockNum', function () {
-    return 45.595208;
+    return 0;
 });
 
     
